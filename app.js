@@ -1,22 +1,17 @@
-/* Crownphysio — interactions: lead modal → WhatsApp, GSAP scroll animations */
+/* Crownphysio v2 — interactions: booking card + modal → WhatsApp, premium GSAP motion */
 (function () {
   var WA_NUMBER = "919561998544";
-
-  /* ---------------- Lead modal ---------------- */
-  var back = document.getElementById("leadModal");
-  var painRow = document.getElementById("painChips");
-  var ageRow = document.getElementById("ageChips");
-  var noteBox = document.getElementById("leadNote");
-  var sendBtn = document.getElementById("leadSend");
 
   var painAreas = [
     "Back Pain", "Neck Pain", "Knee Pain", "Shoulder Pain", "Sciatica",
     "Slip Disc", "Arthritis", "Frozen Shoulder", "Heel Pain", "Elbow Pain",
-    "Hip / Sciatica", "Post-Surgery Recovery", "Stroke / Paralysis", "Senior Care", "Other"
+    "Post-Surgery Recovery", "Stroke / Paralysis", "Senior Care", "Other"
   ];
+  var heroAreas = ["Back Pain", "Neck Pain", "Knee Pain", "Shoulder Pain", "Post-Surgery", "Other"];
   var ageGroups = ["Under 18", "18–40", "40–60", "60+"];
 
   function buildChips(row, items, single) {
+    if (!row) return;
     items.forEach(function (label) {
       var b = document.createElement("button");
       b.type = "button";
@@ -33,6 +28,33 @@
       row.appendChild(b);
     });
   }
+
+  function collectAndSend(painRow, ageRow, noteEl) {
+    var pains = Array.prototype.map.call(painRow.querySelectorAll(".chip.on"), function (c) { return c.textContent; });
+    var age = ageRow ? ageRow.querySelector(".chip.on") : null;
+    var note = noteEl ? noteEl.value.trim() : "";
+    var lines = ["Namaste Crownphysio 🙏", "I need physiotherapy at home."];
+    if (pains.length) lines.push("Pain area: " + pains.join(", "));
+    if (age) lines.push("Patient age: " + age.textContent);
+    if (note) lines.push("Note: " + note);
+    lines.push("(Sent from crownphysio website)");
+    window.open("https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(lines.join("\n")), "_blank");
+  }
+
+  /* Hero booking card */
+  var heroPain = document.getElementById("heroPainChips");
+  var heroAge = document.getElementById("heroAgeChips");
+  var heroNote = document.getElementById("heroNote");
+  buildChips(heroPain, heroAreas, false);
+  buildChips(heroAge, ageGroups, true);
+  var heroSend = document.getElementById("heroSend");
+  if (heroSend) heroSend.addEventListener("click", function () { collectAndSend(heroPain, heroAge, heroNote); });
+
+  /* Modal */
+  var back = document.getElementById("leadModal");
+  var painRow = document.getElementById("painChips");
+  var ageRow = document.getElementById("ageChips");
+  var noteBox = document.getElementById("leadNote");
   buildChips(painRow, painAreas, false);
   buildChips(ageRow, ageGroups, true);
 
@@ -41,7 +63,6 @@
       c.classList.toggle("on", c.textContent === area);
     });
   }
-
   window.openLeadModal = function (area) {
     if (area) selectPain(area);
     back.classList.add("open");
@@ -54,8 +75,8 @@
   document.getElementById("leadClose").addEventListener("click", closeModal);
   back.addEventListener("click", function (e) { if (e.target === back) closeModal(); });
   document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeModal(); });
+  document.getElementById("leadSend").addEventListener("click", function () { collectAndSend(painRow, ageRow, noteBox); });
 
-  /* Openers: pain cards + generic triggers */
   document.querySelectorAll("[data-pain]").forEach(function (el) {
     el.addEventListener("click", function () { window.openLeadModal(el.getAttribute("data-pain")); });
   });
@@ -63,101 +84,81 @@
     el.addEventListener("click", function (e) { e.preventDefault(); window.openLeadModal(null); });
   });
 
-  /* Send → WhatsApp */
-  sendBtn.addEventListener("click", function () {
-    var pains = Array.prototype.map.call(painRow.querySelectorAll(".chip.on"), function (c) { return c.textContent; });
-    var age = ageRow.querySelector(".chip.on");
-    var note = noteBox.value.trim();
-
-    var lines = ["Namaste Crownphysio 🙏", "I need physiotherapy at home."];
-    if (pains.length) lines.push("Pain area: " + pains.join(", "));
-    if (age) lines.push("Patient age: " + age.textContent);
-    if (note) lines.push("Note: " + note);
-    lines.push("(Sent from crownphysio website)");
-
-    var url = "https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(lines.join("\n"));
-    window.open(url, "_blank");
-  });
-
-  /* ---------------- Nav scrolled state ---------------- */
+  /* Nav scrolled state */
   var nav = document.getElementById("nav");
   function navState() { nav.classList.toggle("scrolled", window.scrollY > 24); }
   window.addEventListener("scroll", navState, { passive: true });
   navState();
 
-  /* ---------------- GSAP animations ---------------- */
+  /* ---------------- Motion ---------------- */
   if (typeof gsap === "undefined") {
     document.documentElement.classList.add("no-gsap");
     return;
   }
   gsap.registerPlugin(ScrollTrigger);
-
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (reduceMotion) {
-    gsap.set("[data-reveal]", { opacity: 1 });
-    return;
-  }
+  if (reduceMotion) { gsap.set("[data-reveal]", { opacity: 1 }); return; }
 
-  /* Hero entrance */
-  var tl = gsap.timeline({ defaults: { ease: "power3.out" } });
-  tl.from(".nav-inner", { y: -24, opacity: 0, duration: 0.7 })
-    .from(".hero-tag", { y: 24, opacity: 0, duration: 0.6 }, "-=0.4")
-    .from(".hero h1", { y: 40, opacity: 0, duration: 0.9 }, "-=0.35")
-    .from(".hero-sub", { y: 28, opacity: 0, duration: 0.7 }, "-=0.55")
-    .from(".hero-ctas > *", { y: 22, opacity: 0, duration: 0.6, stagger: 0.1 }, "-=0.45")
-    .from(".trust-item", { y: 18, opacity: 0, duration: 0.55, stagger: 0.08 }, "-=0.35")
-    .from(".body-stage", { opacity: 0, scale: 0.94, duration: 1.1, ease: "power2.out" }, 0.3)
-    .from(".float-chip", { y: 26, opacity: 0, duration: 0.7, stagger: 0.15 }, "-=0.6");
+  var EASE = "expo.out";
 
-  /* Floating chips gentle parallax drift */
-  gsap.to(".chip-a", { y: -14, duration: 3, yoyo: true, repeat: -1, ease: "sine.inOut" });
-  gsap.to(".chip-b", { y: 12, duration: 3.6, yoyo: true, repeat: -1, ease: "sine.inOut", delay: 0.5 });
+  /* Hero entrance — calm, expensive */
+  var tl = gsap.timeline({ defaults: { ease: EASE } });
+  tl.from(".nav", { y: -20, opacity: 0, duration: 1 })
+    .from(".hero-tag", { y: 22, opacity: 0, duration: 0.9 }, "-=0.7")
+    .from(".hero h1", { y: 46, opacity: 0, duration: 1.2 }, "-=0.7")
+    .from(".hero-sub", { y: 28, opacity: 0, duration: 1 }, "-=0.9")
+    .from(".hero-ctas > *", { y: 20, opacity: 0, duration: 0.8, stagger: 0.09 }, "-=0.8")
+    .from(".hero-proof", { y: 16, opacity: 0, duration: 0.8 }, "-=0.6")
+    .from(".book-card", { y: 50, opacity: 0, duration: 1.3 }, 0.45);
 
-  /* Hero parallax on scroll */
-  gsap.to(".hero-copy", {
-    y: -60, opacity: 0.25, ease: "none",
-    scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom 30%", scrub: true }
+  /* Ambient orb drift (scroll parallax) */
+  gsap.utils.toArray(".orb").forEach(function (orb, i) {
+    gsap.to(orb, {
+      y: (i % 2 ? -90 : 90), ease: "none",
+      scrollTrigger: { trigger: orb.parentElement, start: "top bottom", end: "bottom top", scrub: 1.2 }
+    });
   });
 
   /* Section reveals */
   gsap.utils.toArray("[data-reveal]").forEach(function (el) {
-    gsap.fromTo(el,
-      { y: 44, opacity: 0 },
-      {
-        y: 0, opacity: 1, duration: 0.9, ease: "power3.out",
-        scrollTrigger: { trigger: el, start: "top 86%" }
-      });
+    gsap.fromTo(el, { y: 40, opacity: 0 }, {
+      y: 0, opacity: 1, duration: 1.1, ease: EASE,
+      scrollTrigger: { trigger: el, start: "top 87%" }
+    });
   });
 
-  /* Staggered card grids */
-  [".pain-grid", ".svc-grid", ".why-grid", ".how-grid", ".testi-grid"].forEach(function (sel) {
+  /* Staggered grids */
+  [".pain-grid", ".svc-grid", ".why-grid", ".testi-grid", ".trust-glass", ".how-list", ".faq-list"].forEach(function (sel) {
     var grid = document.querySelector(sel);
     if (!grid) return;
-    gsap.fromTo(grid.children,
-      { y: 36, opacity: 0 },
-      {
-        y: 0, opacity: 1, duration: 0.7, ease: "power3.out", stagger: 0.07,
-        scrollTrigger: { trigger: grid, start: "top 84%" }
-      });
+    gsap.fromTo(grid.children, { y: 32, opacity: 0 }, {
+      y: 0, opacity: 1, duration: 0.9, ease: EASE, stagger: 0.06,
+      scrollTrigger: { trigger: grid, start: "top 86%" }
+    });
   });
 
-  /* Stat counters */
+  /* Counters */
   gsap.utils.toArray("[data-count]").forEach(function (el) {
     var end = parseInt(el.getAttribute("data-count"), 10);
     var obj = { v: 0 };
     gsap.to(obj, {
-      v: end, duration: 1.8, ease: "power2.out",
-      scrollTrigger: { trigger: el, start: "top 88%" },
+      v: end, duration: 2, ease: "power3.out",
+      scrollTrigger: { trigger: el, start: "top 90%" },
       onUpdate: function () { el.textContent = Math.round(obj.v); }
     });
   });
 
-  /* Parallax decorative drift inside green sections */
-  gsap.utils.toArray("[data-parallax]").forEach(function (el) {
-    var amt = parseFloat(el.getAttribute("data-parallax")) || 40;
-    gsap.fromTo(el, { y: amt }, {
-      y: -amt, ease: "none",
-      scrollTrigger: { trigger: el.closest("section") || el, start: "top bottom", end: "bottom top", scrub: true }
+  /* Magnetic buttons (fine pointers only) */
+  if (window.matchMedia("(pointer: fine)").matches) {
+    document.querySelectorAll(".btn").forEach(function (btn) {
+      var qx = gsap.quickTo(btn, "x", { duration: 0.5, ease: "power3.out" });
+      var qy = gsap.quickTo(btn, "y", { duration: 0.5, ease: "power3.out" });
+      btn.addEventListener("pointermove", function (e) {
+        var r = btn.getBoundingClientRect();
+        qx((e.clientX - r.left - r.width / 2) * 0.18);
+        qy((e.clientY - r.top - r.height / 2) * 0.3);
+      });
+      btn.addEventListener("pointerleave", function () { qx(0); qy(0); });
     });
-  });
+  }
 })();
