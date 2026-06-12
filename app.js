@@ -1,6 +1,6 @@
 /* Crownphysio v2 — interactions: booking card + modal → WhatsApp, premium GSAP motion */
 (function () {
-  var WA_NUMBER = "919561998544";
+  var WA_NUMBER = "918177996444";
 
   var painAreas = [
     "Back Pain", "Neck Pain", "Knee Pain", "Shoulder Pain", "Sciatica",
