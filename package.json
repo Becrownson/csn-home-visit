@@ -1,0 +1,26 @@
+{
+ "name": "crownphysio",
+ "version": "2.0.0",
+ "private": true,
+ "scripts": {
+  "dev": "next dev",
+  "build": "next build",
+  "start": "next start",
+  "lint": "next lint"
+ },
+ "dependencies": {
+  "framer-motion": "^11.18.2",
+  "next": "16.2.1",
+  "react": "^19.2.4",
+  "react-dom": "^19.2.4"
+ },
+ "devDependencies": {
+  "@types/node": "^22.10.2",
+  "@types/react": "^19.0.2",
+  "@types/react-dom": "^19.0.2",
+  "autoprefixer": "^10.5.0",
+  "postcss": "^8.5.15",
+  "tailwindcss": "^3.4.19",
+  "typescript": "^5.7.2"
+ }
+}
