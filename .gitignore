@@ -5,3 +5,7 @@ node_modules
 .next
 out
 .env*.local
+
+# Local working copies of images (source files for the branded/clean exports).
+# Only public/images/ is deployed.
+images/
