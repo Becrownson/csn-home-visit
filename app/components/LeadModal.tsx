@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, type FormEvent } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { useLeadModal } from "./LeadModalContext";
 import { buildWaUrl, openWhatsApp, type VisitType } from "../lib/wa";
@@ -74,10 +75,30 @@ export function LeadModal() {
  <button
  onClick={closeLead}
  aria-label="Close"
- className="absolute top-4 right-4 grid h-9 w-9 place-items-center rounded-full bg-white/70 text-primary-800 hover:bg-white"
+ className="absolute top-3 right-3 z-10 grid h-9 w-9 place-items-center rounded-full bg-white/90 text-primary-800 hover:bg-white shadow-sm"
  >
  <Icon.close size={18} />
  </button>
+
+ {/* Image header */}
+ <div className="relative -mx-6 -mt-6 sm:-mx-8 sm:-mt-8 mb-5 aspect-[16/9] overflow-hidden rounded-t-3xl sm:rounded-t-3xl">
+ <Image
+ src="/images/website/06_about_team.jpg"
+ alt="CrownPhysio team of licensed therapists"
+ fill
+ sizes="(max-width: 640px) 100vw, 480px"
+ className="object-cover"
+ />
+ <div className="absolute inset-0 bg-gradient-to-t from-primary-900/60 via-primary-900/10 to-transparent" />
+ <div className="absolute bottom-3 left-5 right-5 text-white">
+ <div className="text-[10px] uppercase tracking-wider font-semibold text-cyan-200">
+ Booking in 60s
+ </div>
+ <div className="font-display text-base font-semibold mt-0.5">
+ Confirmed on WhatsApp within minutes
+ </div>
+ </div>
+ </div>
 
  <h2 className="font-display text-2xl font-semibold text-primary-900">Book a session</h2>
  <p className="text-sm text-ink-muted mt-1">

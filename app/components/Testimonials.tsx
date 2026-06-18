@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useRef, useState, useEffect } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { Reveal } from "./motion/Reveal";
@@ -77,17 +78,31 @@ export function Testimonials() {
  {TESTIMONIALS.map((t) => (
  <article
  key={t.id}
- className="glass rounded-glass p-6 min-w-[300px] sm:min-w-[340px] max-w-[340px] flex-shrink-0"
+ className="glass rounded-glass overflow-hidden min-w-[300px] sm:min-w-[340px] max-w-[340px] flex-shrink-0 flex flex-col"
  >
+ {/* Portrait */}
+ <div className="relative aspect-[4/3] w-full bg-gradient-to-br from-primary-100 to-accent-100">
+ <Image
+ src={t.image}
+ alt={t.imageAlt}
+ fill
+ sizes="340px"
+ className="object-cover"
+ />
+ </div>
+
+ {/* Body */}
+ <div className="p-5 lg:p-6 flex-1 flex flex-col">
  <div className="flex gap-0.5 text-accent-500 mb-3" aria-label={`${t.rating} stars`}>
  {Array.from({ length: t.rating }).map((_, i) => (
  <Icon.star key={i} size={16} />
  ))}
  </div>
- <p className="text-sm lg:text-base text-ink leading-relaxed">&ldquo;{t.quote}&rdquo;</p>
+ <p className="text-sm lg:text-base text-ink leading-relaxed flex-1">&ldquo;{t.quote}&rdquo;</p>
  <div className="mt-5 pt-4 border-t border-primary-100">
  <div className="font-semibold text-primary-900">{t.name}</div>
  <div className="text-xs text-ink-muted mt-0.5">{t.area} · {t.condition}</div>
+ </div>
  </div>
  </article>
  ))}
