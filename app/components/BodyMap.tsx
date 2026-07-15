@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import { Reveal } from "./motion/Reveal";
 import { REGIONS } from "../lib/bodyMap";
 import { useLeadModal } from "./LeadModalContext";
