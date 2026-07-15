@@ -21,7 +21,7 @@ export function Services() {
  </div>
  </Reveal>
 
- <Stagger className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6" stagger={0.06}>
+ <Stagger className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6" stagger={0.05}>
  {SERVICES.map((s) => {
  const I = (Icon as any)[s.icon] as React.FC<{ size?: number; className?: string }>;
  return (

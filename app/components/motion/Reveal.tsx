@@ -38,7 +38,7 @@ export function Reveal({
  className={className}
  initial="hidden"
  whileInView="show"
- viewport={{ once, amount: 0.2 }}
+ viewport={{ once, amount: 0.05 }}
  variants={variants}
  >
  {children}
