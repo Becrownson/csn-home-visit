@@ -5,7 +5,6 @@ import { Hero } from "./components/Hero";
 import { TrustBand } from "./components/TrustBand";
 import { About } from "./components/About";
 import { Services } from "./components/Services";
-import { BodyMap } from "./components/BodyMap";
 import { HowItWorks } from "./components/HowItWorks";
 import { AdvancedEquipment } from "./components/AdvancedEquipment";
 import { Pricing } from "./components/Pricing";
@@ -24,7 +23,6 @@ export default function HomePage() {
  <TrustBand />
  <About />
  <Services />
- <BodyMap />
  <HowItWorks />
  <AdvancedEquipment />
  <Pricing />

@@ -7,7 +7,7 @@ import { useLeadModal } from "./LeadModalContext";
 
 const LINKS = [
  { href: "#services", label: "Services" },
- { href: "#body-map", label: "Conditions" },
+ { href: "#top", label: "Conditions" },
  { href: "#pricing", label: "Pricing" },
  { href: "#how-it-works", label: "How it works" },
  { href: "#testimonials", label: "Reviews" },

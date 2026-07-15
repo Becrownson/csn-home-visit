@@ -1,15 +1,13 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { Magnetic } from "./motion/Magnetic";
 import { Parallax } from "./motion/Parallax";
 import { openWhatsApp } from "../lib/wa";
 import { Icon } from "./Icon";
 import { AREAS } from "../lib/areas";
-
-const BULLET_ICONS = ["star", "mapPin", "clock", "phone"];
+import { REGIONS } from "../lib/bodyMap";
 
 const HERO_SLIDES = [
  {
@@ -29,9 +27,20 @@ const HERO_SLIDES = [
  },
 ];
 
+const IMAGES = Array.from({ length: 10 }, (_, i) => `/images/human-body/body-${i + 1}.png`);
+
+const FLOAT_CLASSES = [
+ "float-a", "float-b", "float-c", "float-d", "float-e",
+ "float-f", "float-g", "float-h", "float-i", "float-j",
+];
+
+const FLOAT_DURATIONS = [4.2, 3.8, 5.0, 4.5, 3.6, 4.8, 4.0, 5.2, 3.9, 4.3];
+
 export function Hero() {
  const reduce = useReducedMotion();
  const [slide, setSlide] = useState(0);
+ const [idx, setIdx] = useState(0);
+ const region = REGIONS[idx];
 
  useEffect(() => {
  if (reduce) return;
@@ -40,6 +49,15 @@ export function Hero() {
  }, 5200);
  return () => clearInterval(id);
  }, [reduce]);
+
+ useEffect(() => {
+ IMAGES.forEach((src) => {
+ const img = new Image();
+ img.src = src;
+ });
+ const t = setInterval(() => setIdx((i) => (i + 1) % IMAGES.length), 4000);
+ return () => clearInterval(t);
+ }, []);
 
  return (
  <section id="top" className="relative min-h-screen pt-24 pb-12 lg:pt-28 lg:pb-20 overflow-hidden">
@@ -81,30 +99,35 @@ export function Hero() {
  <motion.div
  initial={reduce ? false : { opacity: 0, y: 16 }}
  animate={{ opacity: 1, y: 0 }}
- transition={{ duration: reduce ? 0 : 0.5, delay: reduce ? 0 : 0.5 }}
- className="flex flex-wrap gap-3 justify-center lg:justify-start"
+ transition={{ duration: reduce ? 0 : 0.7, delay: reduce ? 0 : 0.3 }}
  >
+ <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3">
  <Magnetic>
- <a href="#pricing" className="btn-primary text-base sm:text-lg">
+ <a
+ href="#pricing"
+ className="btn-primary"
+ >
  Book online
+ <Icon.arrow size={16} />
  </a>
  </Magnetic>
  <Magnetic>
- <a
+ <button
  onClick={() => openWhatsApp({ visitType: "home", source: "hero-phone" })}
  className="btn-secondary"
  >
  <Icon.phone size={18} />
  Call: +91 95619 98544
- </a>
+ </button>
  </Magnetic>
+ </div>
  </motion.div>
 
  {/* Live availability ticker */}
  <motion.div
  initial={reduce ? false : { opacity: 0, y: 16 }}
  animate={{ opacity: 1, y: 0 }}
- transition={{ duration: reduce ? 0 : 0.5, delay: reduce ? 0 : 0.8 }}
+ transition={{ duration: reduce ? 0 : 0.7, delay: reduce ? 0 : 0.5 }}
  className="glass-soft rounded-full px-5 py-2.5 inline-flex items-center self-center lg:self-start"
  >
  <p className="flex items-center justify-center gap-2 text-xs sm:text-sm text-primary-700">
@@ -117,7 +140,7 @@ export function Hero() {
  <motion.div
  initial={reduce ? false : { opacity: 0, y: 16 }}
  animate={{ opacity: 1, y: 0 }}
- transition={{ duration: reduce ? 0 : 0.5, delay: reduce ? 0 : 1 }}
+ transition={{ duration: reduce ? 0 : 0.7, delay: reduce ? 0 : 0.7 }}
  className="flex flex-wrap gap-6 sm:gap-8 justify-center lg:justify-start text-center lg:text-left mt-2"
  >
  {[
@@ -137,51 +160,32 @@ export function Hero() {
  </motion.div>
  </div>
 
- {/* Right: hero image carousel */}
+ {/* Right: floating body map */}
  <motion.div
  initial={reduce ? false : { opacity: 0, scale: 0.96 }}
  animate={{ opacity: 1, scale: 1 }}
  transition={{ duration: reduce ? 0 : 0.8, delay: reduce ? 0 : 0.3, ease: [0.16, 1, 0.3, 1] }}
- className="relative order-1 lg:order-2"
+ className="relative order-1 lg:order-2 max-w-lg mx-auto lg:mx-0"
  >
- <div className="relative aspect-[4/5] sm:aspect-[5/6] lg:aspect-[4/5] max-w-md mx-auto lg:max-w-none">
- {/* Stacked slides */}
- {HERO_SLIDES.map((s, i) => (
- <motion.div
- key={s.src}
- initial={false}
- animate={{
- opacity: i === slide ? 1 : 0,
- scale: i === slide ? 1 : 1.04,
- }}
- transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
- className="absolute inset-0 rounded-[2rem] overflow-hidden glass shadow-glass"
- aria-hidden={i !== slide}
- >
- <Image
- src={s.src}
- alt={s.alt}
- fill
- sizes="(max-width: 1024px) 90vw, 45vw"
- className="object-cover"
- priority={i === 0}
+ <div className="relative h-[380px] sm:h-[440px] lg:h-[500px] flex items-center justify-center">
+ {IMAGES.map((src, i) => (
+ <img
+ key={i}
+ src={src}
+ alt={`Body region ${i + 1}`}
+ loading="eager"
+ className={`absolute inset-0 w-full h-full object-contain drop-shadow-2xl pointer-events-none transition-opacity duration-[900ms] ease-in-out ${i === idx ? "opacity-100" : "opacity-0"} ${FLOAT_CLASSES[i]}`}
+ style={{ animationDuration: `${FLOAT_DURATIONS[i]}s` }}
  />
- {/* Overlay gradient */}
- <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-primary-900/60 via-primary-900/20 to-transparent" />
- <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between gap-2">
- <span className="glass-soft text-primary-800 text-xs font-semibold uppercase tracking-wider rounded-full px-3 py-1">
- {s.label}
- </span>
- </div>
- </motion.div>
  ))}
+ </div>
 
- {/* Floating badge */}
+ {/* Floating badge - rating */}
  <motion.div
  initial={reduce ? false : { opacity: 0, y: 12 }}
  animate={{ opacity: 1, y: 0 }}
  transition={{ duration: reduce ? 0 : 0.6, delay: reduce ? 0 : 1.1 }}
- className="hidden sm:flex absolute -top-4 -right-4 lg:-right-6 glass-strong rounded-2xl p-3 items-center gap-2 shadow-cta z-10"
+ className="hidden sm:flex absolute -top-2 -right-2 lg:-right-4 glass-strong rounded-2xl p-3 items-center gap-2 shadow-cta z-10"
  >
  <div className="grid h-9 w-9 place-items-center rounded-xl bg-accent-100 text-accent-700">
  <Icon.star size={18} />
@@ -192,12 +196,12 @@ export function Hero() {
  </div>
  </motion.div>
 
- {/* Floating badge - experience */}
+ {/* Floating badge - licensed */}
  <motion.div
  initial={reduce ? false : { opacity: 0, y: 12 }}
  animate={{ opacity: 1, y: 0 }}
  transition={{ duration: reduce ? 0 : 0.6, delay: reduce ? 0 : 1.3 }}
- className="hidden md:flex absolute -bottom-4 -left-4 lg:-left-6 glass-strong rounded-2xl p-3 items-center gap-2 shadow-cta z-10"
+ className="hidden md:flex absolute -bottom-2 -left-2 lg:-left-4 glass-strong rounded-2xl p-3 items-center gap-2 shadow-cta z-10"
  >
  <div className="grid h-9 w-9 place-items-center rounded-xl bg-primary-100 text-primary-700">
  <Icon.check size={18} />
@@ -207,21 +211,42 @@ export function Hero() {
  <div className="text-sm font-bold text-primary-900">Since 2004</div>
  </div>
  </motion.div>
- </div>
 
- {/* Slide dots */}
- <div className="mt-6 flex items-center justify-center gap-2">
- {HERO_SLIDES.map((_, i) => (
- <button
- key={i}
- onClick={() => setSlide(i)}
- aria-label={`Show hero image ${i + 1}`}
- className={`h-1.5 rounded-full transition-all duration-300 ${
- i === slide ? "w-8 bg-accent-600" : "w-1.5 bg-primary-300 hover:bg-primary-400"
- }`}
- />
+ {/* Region info card */}
+ <motion.div
+ key={region.id}
+ initial={{ opacity: 0, y: 12 }}
+ animate={{ opacity: 1, y: 0 }}
+ transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+ className="glass rounded-glass p-5 lg:p-6 mt-4"
+ >
+ <div className="flex items-center gap-3 mb-3">
+ <span className="grid h-10 w-10 place-items-center rounded-xl bg-accent-100 text-accent-700 shrink-0">
+ <Icon.check size={18} />
+ </span>
+ <div>
+ <span className="eyebrow text-primary-600 text-xs">Region</span>
+ <h3 className="font-display text-lg lg:text-xl font-semibold text-primary-900 leading-tight">
+ {region.title}
+ </h3>
+ </div>
+ </div>
+ <p className="text-sm text-ink-muted leading-relaxed">{region.approach}</p>
+ <div className="mt-3 flex flex-wrap gap-1.5">
+ {region.conditions.slice(0, 4).map((c) => (
+ <span key={c} className="bg-white/80 border border-primary-100 rounded-full px-2.5 py-0.5 text-xs text-primary-800">
+ {c}
+ </span>
  ))}
  </div>
+ <a
+ href="#pricing"
+ className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-accent-700 hover:text-accent-800 transition-colors"
+ >
+ Book for {region.title}
+ <Icon.arrow size={14} />
+ </a>
+ </motion.div>
  </motion.div>
  </div>
  </section>
