@@ -39,7 +39,7 @@ export function Pricing() {
  <Reveal delay={0.15}>
  <div className="glass-strong rounded-3xl p-6 lg:p-10 max-w-4xl mx-auto">
  {/* Visit type toggle */}
- <div className="grid grid-cols-3 gap-2 sm:gap-3 mb-8">
+ <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3 mb-8">
  {VISIT_OPTIONS.map((opt) => {
  const I = (Icon as any)[opt.icon] as React.FC<{ size?: number }>;
  const active = visit === opt.id;

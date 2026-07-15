@@ -30,7 +30,7 @@ export function Services() {
  className="group glass rounded-glass overflow-hidden hover:-translate-y-1 hover:shadow-lg transition-all duration-300 ease-expo flex flex-col"
  >
  {/* Image */}
- <div className="relative aspect-[16/10] overflow-hidden">
+ <div className="relative aspect-[4/3] overflow-hidden">
  <Image
  src={s.image}
  alt={s.imageAlt}
@@ -62,7 +62,7 @@ export function Services() {
  </ul>
  <button
  onClick={() => openWhatsApp({ source: `service-${s.id}` })}
- className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-accent-700 hover:text-accent-800 transition-colors"
+ className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-accent-700 hover:text-accent-800 transition-colors min-h-[44px]"
  >
  Book this service
  <Icon.arrow size={14} />

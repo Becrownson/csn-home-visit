@@ -60,7 +60,7 @@ export function HowItWorks() {
  return (
  <article key={s.n} className="glass rounded-glass overflow-hidden flex flex-col hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
  {/* Image */}
- <div className="relative aspect-[5/4] overflow-hidden">
+ <div className="relative aspect-[4/3] overflow-hidden">
  <Image
  src={s.image}
  alt={s.alt}

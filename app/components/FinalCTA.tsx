@@ -12,7 +12,7 @@ export function FinalCTA() {
  <section className="section">
  <div className="container-page">
  <Reveal>
- <div className="relative overflow-hidden rounded-3xl p-8 sm:p-12 lg:p-16 text-center text-white min-h-[420px] flex items-center justify-center">
+ <div className="relative overflow-hidden rounded-3xl p-8 sm:p-12 lg:p-16 text-center text-white min-h-[300px] flex items-center justify-center">
  {/* Background image */}
  <Image
  src="/images/website/07_facility_interior.jpg"

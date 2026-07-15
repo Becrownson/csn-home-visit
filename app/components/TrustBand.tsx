@@ -21,7 +21,7 @@ const PROOFS = [
 
 export function TrustBand() {
  return (
- <section className="py-12 lg:py-16">
+ <section className="section">
  <div className="container-page">
  <Reveal>
  <div className="relative overflow-hidden rounded-3xl glass shadow-glass">

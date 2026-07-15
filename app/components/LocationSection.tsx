@@ -99,14 +99,14 @@ export function LocationSection() {
  <div className="mt-4 flex flex-wrap gap-2">
  <a
  href="tel:+919561998544"
- className="inline-flex items-center gap-1.5 rounded-full bg-white/15 backdrop-blur-md border border-white/25 text-white text-xs font-semibold px-3 py-1.5 hover:bg-white/25"
+ className="inline-flex items-center gap-1.5 rounded-full bg-white/15 backdrop-blur-md border border-white/25 text-white text-xs font-semibold px-3 py-2 min-h-[44px] hover:bg-white/25"
  >
  <Icon.phone size={12} />
  Call
  </a>
  <button
  onClick={() => openWhatsApp({ source: "location-section" })}
- className="inline-flex items-center gap-1.5 rounded-full bg-white text-accent-700 text-xs font-semibold px-3 py-1.5 hover:scale-105 transition-transform"
+ className="inline-flex items-center gap-1.5 rounded-full bg-white text-accent-700 text-xs font-semibold px-3 py-2 min-h-[44px] hover:scale-105 transition-transform"
  >
  <Icon.whatsapp size={12} />
  Directions

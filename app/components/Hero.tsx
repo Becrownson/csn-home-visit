@@ -165,7 +165,7 @@ export function Hero() {
  initial={reduce ? false : { opacity: 0, scale: 0.96 }}
  animate={{ opacity: 1, scale: 1 }}
  transition={{ duration: reduce ? 0 : 0.8, delay: reduce ? 0 : 0.3, ease: [0.16, 1, 0.3, 1] }}
- className="relative order-2 lg:order-2 max-w-xs sm:max-w-sm lg:max-w-md mx-auto lg:mx-0"
+ className="relative order-2 lg:order-2 max-w-[260px] sm:max-w-[300px] lg:max-w-[340px] mx-auto lg:mx-0"
  >
  <div className="relative h-[280px] sm:h-[340px] lg:h-[440px] flex items-center justify-center">
  {IMAGES.map((src, i) => (
