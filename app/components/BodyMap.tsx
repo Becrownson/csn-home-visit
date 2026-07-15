@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { Reveal } from "./motion/Reveal";
 import { REGIONS } from "../lib/bodyMap";
 import { useLeadModal } from "./LeadModalContext";
@@ -18,11 +17,14 @@ const FLOAT_DURATIONS = [4.2, 3.8, 5.0, 4.5, 3.6, 4.8, 4.0, 5.2, 3.9, 4.3];
 
 export function BodyMap() {
  const [idx, setIdx] = useState(0);
- const reduce = useReducedMotion();
  const { openLead } = useLeadModal();
  const region = REGIONS[idx];
 
  useEffect(() => {
+ IMAGES.forEach((src) => {
+ const img = new Image();
+ img.src = src;
+ });
  const t = setInterval(() => setIdx((i) => (i + 1) % IMAGES.length), 4000);
  return () => clearInterval(t);
  }, []);
@@ -42,25 +44,21 @@ export function BodyMap() {
 
  <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
  <Reveal>
- <div className="relative max-w-sm mx-auto h-[420px] sm:h-[480px] flex items-center justify-center overflow-hidden">
- <AnimatePresence mode="sync">
- <motion.img
- key={idx}
- src={IMAGES[idx]}
- alt={`Body region ${idx + 1}`}
- initial={{ opacity: 0 }}
- animate={{ opacity: 1 }}
- exit={{ opacity: 0 }}
- transition={{ duration: 0.9, ease: "easeInOut" }}
- className={`absolute inset-0 w-full h-full object-contain drop-shadow-2xl pointer-events-none ${reduce ? "" : FLOAT_CLASSES[idx]}`}
- style={reduce ? undefined : { animationDuration: `${FLOAT_DURATIONS[idx]}s` }}
+ <div className="relative max-w-md mx-auto h-[460px] sm:h-[520px] flex items-center justify-center">
+ {IMAGES.map((src, i) => (
+ <img
+ key={i}
+ src={src}
+ alt={`Body region ${i + 1}`}
+ loading="eager"
+ className={`absolute inset-0 w-full h-full object-contain drop-shadow-2xl pointer-events-none transition-opacity duration-[900ms] ease-in-out ${i === idx ? "opacity-100" : "opacity-0"} ${FLOAT_CLASSES[i]}`}
+ style={{ animationDuration: `${FLOAT_DURATIONS[i]}s` }}
  />
- </AnimatePresence>
+ ))}
  </div>
  </Reveal>
 
  <Reveal delay={0.2}>
- <AnimatePresence mode="sync">
  <motion.div
  key={region.id}
  initial={{ opacity: 0, y: 14 }}
@@ -114,7 +112,6 @@ export function BodyMap() {
  </button>
  </div>
  </motion.div>
- </AnimatePresence>
  </Reveal>
  </div>
  </div>

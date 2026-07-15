@@ -8,4 +8,5 @@ out
 
 # Local working copies of images (source files for the branded/clean exports).
 # Only public/images/ is deployed.
-images/
+/images/
+!/public/images/
