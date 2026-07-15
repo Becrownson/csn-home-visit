@@ -34,6 +34,14 @@ export const REGIONS: BodyRegion[] = [
  approach: "Joint mobilisations, scapular control drills, progressive loading, and rotator cuff strengthening.",
  },
  {
+ id: "hand",
+ title: "Hand & Wrist",
+ x: 20,
+ y: 50,
+ conditions: ["Wrist sprain", "Carpal tunnel", "De Quervain's", "Arthritis"],
+ approach: "Joint mobilisations, tendon gliding exercises, splinting guidance, and grip-strengthening protocols.",
+ },
+ {
  id: "back",
  title: "Back & Spine",
  x: 50,
@@ -72,6 +80,14 @@ export const REGIONS: BodyRegion[] = [
  y: 88,
  conditions: ["Heel pain", "Plantar fasciitis", "Ankle sprain", "Achilles tendinitis"],
  approach: "Calf eccentric loading, proprioceptive drills, taping, and footwear assessment.",
+ },
+ {
+ id: "chest",
+ title: "Chest & Ribs",
+ x: 50,
+ y: 30,
+ conditions: ["Chest pain", "Costochondritis", "Post-surgery rehab", "Breathing difficulty"],
+ approach: "Thoracic mobility, breathing exercises, postural correction, and soft tissue release.",
  },
 ];
 
