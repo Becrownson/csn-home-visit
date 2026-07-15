@@ -84,7 +84,7 @@ export function LeadModal() {
  <div className="relative -mx-6 -mt-6 sm:-mx-8 sm:-mt-8 mb-5 aspect-[16/9] overflow-hidden rounded-t-3xl sm:rounded-t-3xl">
  <Image
  src="/images/website/06_about_team.jpg"
- alt="CrownPhysio team of licensed therapists"
+ alt="HomePhysio team of licensed therapists"
  fill
  sizes="(max-width: 640px) 100vw, 480px"
  className="object-cover"

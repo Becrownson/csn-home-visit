@@ -13,7 +13,7 @@ export function Footer() {
  <span className="grid h-8 w-8 place-items-center rounded-full bg-gradient-to-br from-primary-400 to-accent-400 text-white">
  <Icon.sport size={18} />
  </span>
- CrownPhysio
+ HomePhysio
  </div>
  <p className="text-sm text-primary-200 mt-3 leading-relaxed">
  Premium home-visit, in-clinic & tele physiotherapy in Chhatrapati Sambhajinagar since 2004.
@@ -64,7 +64,7 @@ export function Footer() {
  </div>
 
  <div className="pt-6 border-t border-primary-800 text-xs text-primary-300 flex flex-wrap items-center justify-between gap-2">
- <div>© {new Date().getFullYear()} CrownPhysio.online · All rights reserved.</div>
+ <div>© {new Date().getFullYear()} HomePhysio.in · All rights reserved.</div>
  <div>Built with care in Chhatrapati Sambhajinagar</div>
  </div>
  </div>

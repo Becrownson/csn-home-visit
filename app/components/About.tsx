@@ -36,7 +36,7 @@ export function About() {
  <div className="col-span-2 sm:col-span-2 lg:col-span-2 relative aspect-[4/5] sm:aspect-[5/4] lg:aspect-[4/5] rounded-3xl overflow-hidden glass shadow-glass">
  <Image
  src="/images/website/05_founder_portrait.jpg"
- alt="Lead physiotherapist and founder of CrownPhysio"
+ alt="Lead physiotherapist and founder of HomePhysio"
  fill
  sizes="(max-width: 640px) 90vw, (max-width: 1024px) 60vw, 45vw"
  className="object-cover"
@@ -71,7 +71,7 @@ export function About() {
  <div className="relative aspect-square rounded-3xl overflow-hidden glass shadow-glass">
  <Image
  src="/images/website/33_team_member_1.jpg"
- alt="CrownPhysio senior physiotherapist"
+ alt="HomePhysio senior physiotherapist"
  fill
  sizes="(max-width: 640px) 45vw, 30vw"
  className="object-cover"
@@ -80,7 +80,7 @@ export function About() {
  <div className="relative aspect-square rounded-3xl overflow-hidden glass shadow-glass">
  <Image
  src="/images/website/34_team_member_2.jpg"
- alt="CrownPhysio sports and rehab specialist"
+ alt="HomePhysio sports and rehab specialist"
  fill
  sizes="(max-width: 640px) 45vw, 30vw"
  className="object-cover"
@@ -92,7 +92,7 @@ export function About() {
  {/* Right: copy */}
  <div className="lg:col-span-2">
  <Reveal>
- <span className="eyebrow">About CrownPhysio</span>
+ <span className="eyebrow">About HomePhysio</span>
  <h2 className="h-section mt-3">Twenty years of hands-on healing, in your city.</h2>
  <p className="p-section mt-4">
  We started in 2004 with one clinic and one promise — that every patient in Chhatrapati Sambhajinagar deserves hospital-grade physiotherapy without the hospital bill. Today our team of seven licensed therapists treats over 350 patients a year, across every neighbourhood from CIDCO to Cantonment.

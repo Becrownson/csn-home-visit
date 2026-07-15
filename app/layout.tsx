@@ -18,8 +18,8 @@ const noto = Noto_Sans({
 
 export const metadata: Metadata = {
  title: {
- default: "CrownPhysio.online — Physiotherapy in Chhatrapati Sambhajinagar | Home, Clinic, Tele",
- template: "%s · CrownPhysio.online",
+ default: "HomePhysio.in — Physiotherapy in Chhatrapati Sambhajinagar | Home, Clinic, Tele",
+ template: "%s · HomePhysio.in",
  },
  description:
  "Premium home-visit, in-clinic and tele physiotherapy in Chhatrapati Sambhajinagar. Pain relief, post-surgery, stroke rehab, sports & women's health. Trusted since 2004.",
@@ -35,24 +35,24 @@ export const metadata: Metadata = {
  "senior care physiotherapy",
  "CIDCO Garkheda Osmanpura",
  ],
- authors: [{ name: "CrownPhysio" }],
- creator: "CrownPhysio.online",
- metadataBase: new URL("https://crownphysio.online"),
+ authors: [{ name: "HomePhysio" }],
+ creator: "HomePhysio.in",
+ metadataBase: new URL("https://homephysio.in"),
  openGraph: {
  type: "website",
  locale: "en_IN",
- url: "https://crownphysio.online",
- siteName: "CrownPhysio.online",
- title: "CrownPhysio.online — Physiotherapy in Chhatrapati Sambhajinagar",
+ url: "https://homephysio.in",
+ siteName: "HomePhysio.in",
+ title: "HomePhysio.in — Physiotherapy in Chhatrapati Sambhajinagar",
  description: "Home, clinic & tele physiotherapy. Trusted since 2004.",
  },
  twitter: {
  card: "summary_large_image",
- title: "CrownPhysio.online",
+ title: "HomePhysio.in",
  description: "Premium physiotherapy in Chhatrapati Sambhajinagar",
  },
  alternates: {
- canonical: "https://crownphysio.online",
+ canonical: "https://homephysio.in",
  },
  robots: {
  index: true,
@@ -71,10 +71,10 @@ export const viewport: Viewport = {
 const jsonLd = {
  "@context": "https://schema.org",
  "@type": "MedicalBusiness",
- name: "CrownPhysio.online",
+ name: "HomePhysio.in",
  description:
  "Home-visit, in-clinic and tele physiotherapy in Chhatrapati Sambhajinagar.",
- url: "https://crownphysio.online",
+ url: "https://homephysio.in",
  telephone: "+91-95619-98544",
  email: "Crownphysio@gmail.com",
  areaServed: [

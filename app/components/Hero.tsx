@@ -76,7 +76,7 @@ export function Hero() {
 
  <div className="container-page grid lg:grid-cols-2 gap-10 lg:gap-14 items-center relative">
  {/* Left: copy */}
- <div className="flex flex-col gap-6 lg:gap-8 text-center lg:text-left order-2 lg:order-1">
+ <div className="flex flex-col gap-6 lg:gap-8 text-center lg:text-left order-1">
  <motion.div
  initial={reduce ? false : { opacity: 0, y: 16 }}
  animate={{ opacity: 1, y: 0 }}
@@ -165,9 +165,9 @@ export function Hero() {
  initial={reduce ? false : { opacity: 0, scale: 0.96 }}
  animate={{ opacity: 1, scale: 1 }}
  transition={{ duration: reduce ? 0 : 0.8, delay: reduce ? 0 : 0.3, ease: [0.16, 1, 0.3, 1] }}
- className="relative order-1 lg:order-2 max-w-lg mx-auto lg:mx-0"
+ className="relative order-2 lg:order-2 max-w-xs sm:max-w-sm lg:max-w-md mx-auto lg:mx-0"
  >
- <div className="relative h-[380px] sm:h-[440px] lg:h-[500px] flex items-center justify-center">
+ <div className="relative h-[280px] sm:h-[340px] lg:h-[440px] flex items-center justify-center">
  {IMAGES.map((src, i) => (
  <img
  key={i}

@@ -29,7 +29,7 @@ export function TrustBand() {
  <div className="relative aspect-[16/5] sm:aspect-[16/4] w-full">
  <Image
  src="/images/website/04_trust_strip.jpg"
- alt="CrownPhysio team with patients across Chhatrapati Sambhajinagar"
+ alt="HomePhysio team with patients across Chhatrapati Sambhajinagar"
  fill
  sizes="100vw"
  className="object-cover"

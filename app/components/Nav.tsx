@@ -50,7 +50,7 @@ export function Nav() {
  <span className="grid h-8 w-8 place-items-center rounded-full bg-gradient-to-br from-primary-500 to-accent-500 text-white">
  <Icon.sport size={18} />
  </span>
- <span className="hidden sm:inline">CrownPhysio</span>
+ <span className="hidden sm:inline">HomePhysio</span>
  </a>
 
  {/* Desktop links */}

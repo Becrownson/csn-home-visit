@@ -28,7 +28,7 @@ export function LocationSection() {
  <div className="relative h-full min-h-[300px] sm:min-h-[480px] lg:min-h-[560px] rounded-3xl overflow-hidden glass shadow-glass">
  <Image
  src="/images/website/30_lifestyle_banner.jpg"
- alt="CrownPhysio lifestyle — patient enjoying a morning walk after recovery"
+ alt="HomePhysio lifestyle — patient enjoying a morning walk after recovery"
  fill
  sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 33vw"
  className="object-cover"
@@ -53,7 +53,7 @@ export function LocationSection() {
  <div className="relative h-full min-h-[220px] rounded-3xl overflow-hidden glass shadow-glass">
  <Image
  src="/images/website/31_booking_welcome.jpg"
- alt="Welcoming reception area at CrownPhysio"
+ alt="Welcoming reception area at HomePhysio"
  fill
  sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 30vw"
  className="object-cover"
@@ -79,7 +79,7 @@ export function LocationSection() {
  <div className="relative h-full min-h-[220px] rounded-3xl overflow-hidden glass shadow-glass">
  <Image
  src="/images/website/32_contact_entrance.jpg"
- alt="Entrance to the CrownPhysio clinic"
+ alt="Entrance to the HomePhysio clinic"
  fill
  sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 30vw"
  className="object-cover"
@@ -94,7 +94,7 @@ export function LocationSection() {
  Address
  </div>
  <div className="font-display text-base sm:text-lg font-semibold mt-1 leading-snug">
- CrownPhysio, Plot 12, Above City Care Pharmacy, Cidco N-7, Chhatrapati Sambhajinagar 431003
+ HomePhysio, Plot 12, Above City Care Pharmacy, Cidco N-7, Chhatrapati Sambhajinagar 431003
  </div>
  <div className="mt-4 flex flex-wrap gap-2">
  <a
